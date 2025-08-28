@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Registrations - Student Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">📝 My Registrations</div>
+        <nav>
+          <a href="student-dashboard.html">Dashboard</a>
+          <a href="index.html">Home</a>
+          <a href="#" id="logout-link">Logout</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1 class="page-title">My Event Registrations</h1>
+      <p class="page-subtitle">View and manage your event registrations</p>
+      
+      <section class="registrations-section">
+        <h2>Registered Events</h2>
+        <table class="registrations-table">
+          <thead>
+            <tr>
+              <th>🏅 Event Name</th>
+              <th>🏈 Sport</th>
+              <th>📅 Event Date</th>
+              <th>📍 Location</th>
+              <th>📝 Registration Date</th>
+              <th>🏆 Result</th>
+            </tr>
+          </thead>
+          <tbody id="registrations-list">
+            <!-- Registrations will be loaded here -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+  
+  <script>
+    // Check authentication
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userRole = localStorage.getItem('userRole');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!isLoggedIn || userRole !== 'student' || !user.id) {
+        window.location.href = 'student-login.html';
+        return;
+      }
+
+      loadRegistrations();
+    });
+
+    // Load registrations
+    async function loadRegistrations() {
+      try {
+        const response = await fetch('http://localhost:5000/api/registrations');
+        const registrations = await response.json();
+        
+        const user = JSON.parse(localStorage.getItem('user'));
+        
+        // Filter my registrations
+        const myRegistrations = registrations.filter(reg => reg.user_id == user.id);
+        
+        // Display registrations
+        const registrationsList = document.getElementById('registrations-list');
+        if (myRegistrations.length === 0) {
+          registrationsList.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #ccc;">No registrations found. <a href="student-events.html" style="color: #6ff0f2;">Register for events here</a></td></tr>';
+        } else {
+          registrationsList.innerHTML = myRegistrations.map(reg => `
+            <tr>
+              <td>${reg.event_title || 'Unknown Event'}</td>
+              <td>${reg.sport_name || 'General'}</td>
+              <td>${reg.event_date ? new Date(reg.event_date).toLocaleDateString() : 'TBD'}</td>
+              <td>${reg.event_location || 'TBD'}</td>
+              <td>${new Date(reg.registration_date).toLocaleDateString()}</td>
+              <td>${reg.result_position || 'Not yet available'}</td>
+            </tr>
+          `).join('');
+        }
+        
+      } catch (error) {
+        console.error('Error loading registrations:', error);
+        document.getElementById('registrations-list').innerHTML = '<tr><td colspan="6" style="text-align: center; color: #ff4d4d;">Error loading registrations.</td></tr>';
+      }
+    }
+
+    // Logout
+    document.getElementById('logout-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = 'login-selection.html';
+    });
+  </script>
+  
+  <style>
+    .registrations-section {
+      margin-bottom: 3rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .registrations-section h2 {
+      color: #6ff0f2;
+      margin-bottom: 1.5rem;
+    }
+    
+    .registrations-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .registrations-table th, .registrations-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .registrations-table th {
+      background-color: rgba(111, 240, 242, 0.2);
+      color: #6ff0f2;
+      font-weight: bold;
+    }
+    
+    .registrations-table tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .registrations-table tr:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+    
+    .registrations-table td {
+      color: #fff;
+    }
+    
+    .registrations-table a {
+      color: #6ff0f2;
+      text-decoration: none;
+    }
+    
+    .registrations-table a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</body>
+</html> 

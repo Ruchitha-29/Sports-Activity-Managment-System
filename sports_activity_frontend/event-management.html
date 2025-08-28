@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Management - Sports Activity Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">🏅 Event Management</div>
+        <nav>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="index.html">Home</a>
+          <a href="login.html">Logout</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1 class="page-title">Event Management</h1>
+      <section class="event-section">
+        <h2>Event Listing</h2>
+        <table class="event-table">
+          <thead>
+            <tr>
+              <th>🏷️ Event Title</th>
+              <th>🏅 Sport Name</th>
+              <th>📅 Date</th>
+              <th>📍 Location</th>
+              <th>👥 Participants</th>
+            </tr>
+          </thead>
+          <tbody id="event-list">
+            <!-- Event rows will be inserted here by JS -->
+          </tbody>
+        </table>
+      </section>
+      <section class="add-event-section">
+        <h2>Add New Event</h2>
+        <form id="add-event-form" class="form-box">
+          <input type="text" id="event-title" placeholder="Event Title" required />
+          <select id="event-sport" required>
+            <option value="">Select Sport</option>
+            <!-- Sports options will be loaded by JS -->
+          </select>
+          <input type="date" id="event-date" required />
+          <input type="text" id="event-location" placeholder="Location" required />
+          <textarea id="event-description" placeholder="Description (optional)"></textarea>
+          <select id="event-coach">
+            <option value="">Assign Coach (optional)</option>
+            <!-- Coach options will be loaded by JS -->
+          </select>
+          <button type="submit">Add Event</button>
+          <p id="event-form-msg"></p>
+        </form>
+      </section>
+      <section class="participants-section" id="participants-section" style="display:none;">
+        <h2>Participants for <span id="participants-event-title"></span></h2>
+        <table class="participants-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Position</th>
+            </tr>
+          </thead>
+          <tbody id="participants-list">
+            <!-- Participants will be loaded by JS -->
+          </tbody>
+        </table>
+        <button id="close-participants">Close</button>
+      </section>
+    </main>
+  </div>
+  <script>
+    // Role-based access control
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!isLoggedIn || !user.id) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Only admins can access event management
+      if (user.role !== 'admin') {
+        alert('Access denied. Only administrators can manage events.');
+        window.location.href = 'dashboard.html';
+        return;
+      }
+    });
+  </script>
+  <script src="event-management.js"></script>
+</body>
+</html> 

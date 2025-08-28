@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Achievements - Sports Activity Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">🎖️ Achievement System</div>
+        <nav>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="index.html">Home</a>
+          <a href="login.html">Logout</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1 class="page-title">Player Achievements</h1>
+      <section class="achievements-section">
+        <h2>Recent Achievements</h2>
+        <table class="achievements-table">
+          <thead>
+            <tr>
+              <th>Player Name</th>
+              <th>Sport Name</th>
+              <th>Prize Won</th>
+              <th>Coach Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Rohit Sharma</td><td>Cricket</td><td>Best Batsman</td><td>Mr. Singh</td></tr>
+            <tr><td>Priya Patel</td><td>Badminton</td><td>Gold Medal</td><td>Ms. Rao</td></tr>
+            <tr><td>Arjun Mehta</td><td>Football</td><td>Top Scorer</td><td>Mr. Das</td></tr>
+            <tr><td>Sneha Iyer</td><td>Basketball</td><td>MVP</td><td>Ms. Thomas</td></tr>
+            <tr><td>Vikram Joshi</td><td>Table Tennis</td><td>Silver Medal</td><td>Mr. Kumar</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+  <script>
+    // Role-based access control
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!isLoggedIn || !user.id) {
+        window.location.href = 'login.html';
+        return;
+      }
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Selection - Sports Activity Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">🏅 Sports</div>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="register.html">Sign Up</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="login-selection-container">
+          <h1>Choose Your Login Type</h1>
+          <p>Select how you want to access the system</p>
+          
+          <div class="login-options">
+            <div class="login-option student-login">
+              <div class="login-icon">👨‍🎓</div>
+              <h2>Student Login</h2>
+              <p>Access your sports activities, view results, and register for events</p>
+              <button onclick="window.location.href='student-login.html'" class="login-btn student-btn">
+                Login as Student
+              </button>
+            </div>
+            
+            <div class="login-option admin-login">
+              <div class="login-icon">👨‍💼</div>
+              <h2>Admin Login</h2>
+              <p>Manage events, add results, and oversee all activities</p>
+              <button onclick="window.location.href='admin-login.html'" class="login-btn admin-btn">
+                Login as Admin
+              </button>
+            </div>
+          </div>
+          
+          <div class="login-footer">
+            <p>Don't have an account? <a href="register.html">Sign up here</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html> 

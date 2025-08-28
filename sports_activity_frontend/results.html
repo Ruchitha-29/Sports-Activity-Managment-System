@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Results - Sports Activity Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">🏅 Results Tracking</div>
+        <nav>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="index.html">Home</a>
+          <a href="login.html">Logout</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1 class="page-title">Results Table View</h1>
+      <section class="results-section">
+        <h2>All Results</h2>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>🏅 Event Name</th>
+              <th>🏃‍♂️ Participant Name</th>
+              <th>🏆 Position</th>
+              <th>🏈 Sport Name</th>
+              <th>📅 Date</th>
+              <th>🧑‍🏫 Coach</th>
+            </tr>
+          </thead>
+          <tbody id="results-list">
+            <!-- Results will be loaded by JS -->
+          </tbody>
+        </table>
+      </section>
+      <section class="add-result-section" id="add-result-section">
+        <h2>Add Result</h2>
+        <form id="add-result-form" class="form-box">
+          <select id="result-event" required>
+            <option value="">Select Event</option>
+            <!-- Event options loaded by JS -->
+          </select>
+          <select id="result-user" required>
+            <option value="">Select Participant</option>
+            <!-- User options loaded by JS -->
+          </select>
+          <select id="result-position" required>
+            <option value="">Select Position</option>
+            <option value="1st">1st</option>
+            <option value="2nd">2nd</option>
+            <option value="3rd">3rd</option>
+            <option value="Participant">Participant</option>
+          </select>
+          <select id="result-coach">
+            <option value="">Assign Coach (optional)</option>
+            <!-- Coach options loaded by JS -->
+          </select>
+          <button type="submit">Add Result</button>
+          <p id="result-form-msg"></p>
+        </form>
+      </section>
+    </main>
+  </div>
+  <script>
+    // Role-based access control
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!isLoggedIn || !user.id) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Hide add result section for students
+      if (user.role !== 'admin') {
+        document.getElementById('add-result-section').style.display = 'none';
+      }
+    });
+  </script>
+  <script src="results.js"></script>
+</body>
+</html> 

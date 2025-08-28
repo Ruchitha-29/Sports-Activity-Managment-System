@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard - Sports Activity Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">🏅 Student Dashboard</div>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="#" id="logout-link">Logout</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="hero-text">
+          <h1>Welcome, <span id="user-name">Student</span>! 👨‍🎓</h1>
+          <p>View your sports activities, results, and register for new events.</p>
+        </div>
+        <div class="dashboard-cards" id="dashboard-cards">
+          <!-- Student-specific cards -->
+          <a href="student-results.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">🏆</div>
+              <h2>View Results</h2>
+              <p>Check your performance and results in all sports events.</p>
+            </div>
+          </a>
+          <a href="student-events.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">📅</div>
+              <h2>Available Events</h2>
+              <p>Browse and register for upcoming sports events.</p>
+            </div>
+          </a>
+          <a href="student-registrations.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">📝</div>
+              <h2>My Registrations</h2>
+              <p>View and manage your event registrations.</p>
+            </div>
+          </a>
+          <a href="analytics.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">📊</div>
+              <h2>Analytics</h2>
+              <p>View performance analytics and statistics.</p>
+            </div>
+          </a>
+          <a href="achievements.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">🎖️</div>
+              <h2>Achievements</h2>
+              <p>Track your achievements and milestones.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    // Check if user is logged in as student
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userRole = localStorage.getItem('userRole');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!isLoggedIn || userRole !== 'student' || !user.id) {
+        window.location.href = 'student-login.html';
+        return;
+      }
+
+      // Display user name
+      document.getElementById('user-name').textContent = user.username;
+    });
+
+    document.getElementById('logout-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = 'login-selection.html';
+    });
+  </script>
+</body>
+</html> 

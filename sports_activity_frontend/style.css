@@ -1,0 +1,1138 @@
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: url('sportss.jpg') ;
+  background-attachment: fixed;
+  background-size: cover;
+  color: white;
+}
+
+/* Container Utility */
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Navigation */
+header {
+  padding: 2rem 0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 2rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #6ff0f2;
+}
+
+/* Hero Section */
+.hero {
+  padding: 4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 500px;
+}
+
+.hero-text h1 {
+  color: #6ff0f2;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-text h1 span {
+  color: #6ff0f2;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-text button {
+  background-color: #6ff0f2;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  color: #333;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero-text button:hover {
+  background-color: #48d1d6;
+}
+
+/* Hero Image */
+.hero-image {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-image img 
+{
+  max-width: 50%;
+  height: 20%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-container {
+    flex-direction: column;
+  }
+
+  nav {
+    margin-top: 1rem;
+  }
+
+  nav a {
+    margin: 0.5rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2.3rem;
+  }
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+.app {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding-top: 3rem;
+}
+
+/* Dark login form styling */
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.login-container {
+  max-width: 350px;
+  margin: 100px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #111;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 6px;
+  background-color: #222;
+  color: #fff;
+}
+
+.login-container input::placeholder {
+  color: #aaa;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #484040;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.login-container button:hover {
+  background-color: #6ff0f2;
+  color: #333;
+}
+
+#login-error {
+  color: #ff4d4d;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.signup-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #111;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.signup-container h1 {
+  margin-bottom: 20px;
+  color: #6ff0f2;
+}
+
+.signup-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 6px;
+  background-color: #222;
+  color: #fff;
+  font-size: 16px;
+}
+
+.signup-container input::placeholder {
+  color: #aaa;
+}
+
+.signup-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #6ff0f2;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.signup-container button:hover {
+  background-color: #48d1d6;
+}
+
+.signup-container p {
+  margin-top: 20px;
+}
+
+#signup-error {
+  color: #ff4d4d;
+}
+
+#signup-success {
+  color: #4dff88;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.dashboard-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.dashboard-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-card h2 {
+  margin-bottom: 1rem;
+  color: #6ff0f2;
+}
+
+.dashboard-card p {
+  color: #ccc;
+}
+
+.dashboard-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.dashboard-card-link:visited {
+  color: inherit;
+}
+
+.dashboard-card-link .dashboard-card {
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .dashboard-card {
+    padding: 1.5rem;
+  }
+}
+
+.page-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #6ff0f2;
+  text-align: center;
+}
+
+.event-section, .add-event-section, .participants-section {
+  margin-bottom: 3rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.event-table, .participants-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.event-table th, .event-table td, .participants-table th, .participants-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.event-table th, .participants-table th {
+  background-color: rgba(111, 240, 242, 0.2);
+  color: #6ff0f2;
+  font-weight: bold;
+}
+
+.event-table tr:nth-child(even), .participants-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.event-table tr:nth-child(odd), .participants-table tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.event-table td, .participants-table td {
+  color: #fff;
+}
+
+.event-table td button, .participants-table td button {
+  background-color: #6ff0f2;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.event-table td button:hover, .participants-table td button:hover {
+  background-color: #48d1d6;
+}
+
+.add-event-section h2 {
+  color: #6ff0f2;
+  margin-bottom: 1.5rem;
+}
+
+#add-event-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 600px;
+}
+
+#add-event-form input, #add-event-form select, #add-event-form textarea {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 16px;
+}
+
+#add-event-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#add-event-form button {
+  background-color: #6ff0f2;
+  color: #333;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+#add-event-form button:hover {
+  background-color: #48d1d6;
+}
+
+#event-form-msg {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.participants-section h2 {
+  color: #6ff0f2;
+  margin-bottom: 1.5rem;
+}
+
+#close-participants {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#close-participants:hover {
+  background-color: #e63939;
+}
+
+@media (max-width: 700px) {
+  .event-section, .add-event-section, .participants-section {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+}
+
+.results-section, .add-result-section {
+  margin-bottom: 3rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.results-table th, .results-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.results-table th {
+  background-color: rgba(111, 240, 242, 0.2);
+  color: #6ff0f2;
+  font-weight: bold;
+}
+
+.results-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.results-table tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.results-table td {
+  color: #fff;
+}
+
+.add-result-section h2 {
+  color: #6ff0f2;
+  margin-bottom: 1.5rem;
+}
+
+#add-result-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 600px;
+}
+
+#add-result-form input, #add-result-form select {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 16px;
+}
+
+#add-result-form button {
+  background-color: #6ff0f2;
+  color: #333;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+#add-result-form button:hover {
+  background-color: #48d1d6;
+}
+
+#result-form-msg {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+@media (max-width: 700px) {
+  .results-section, .add-result-section {
+    padding: 1rem;
+  }
+}
+
+.analytics-section {
+  margin-bottom: 3rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.analytics-section h2 {
+  color: #6ff0f2;
+  margin-bottom: 1.5rem;
+}
+
+.analytics-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.analytics-table th, .analytics-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.analytics-table th {
+  background-color: rgba(111, 240, 242, 0.2);
+  color: #6ff0f2;
+  font-weight: bold;
+}
+
+.analytics-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.analytics-table tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.analytics-table td {
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .analytics-section {
+    padding: 1rem;
+  }
+}
+
+.achievements-section {
+  margin-bottom: 3rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.achievements-section h2 {
+  color: #6ff0f2;
+  margin-bottom: 1.5rem;
+}
+
+.achievements-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.achievements-table th, .achievements-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.achievements-table th {
+  background-color: rgba(111, 240, 242, 0.2);
+  color: #6ff0f2;
+  font-weight: bold;
+}
+
+.achievements-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.achievements-table tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.achievements-table td {
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .achievements-section {
+    padding: 1rem;
+  }
+}
+
+/* New Styles for Login Selection and Student Features */
+
+/* Login Selection Page */
+.login-selection-container {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.login-selection-container h1 {
+  color: #6ff0f2;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.login-selection-container p {
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  color: #ccc;
+}
+
+.login-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.login-option {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2.5rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.login-option:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.login-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.login-option h2 {
+  color: #6ff0f2;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.login-option p {
+  color: #ccc;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.login-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.student-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.student-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.admin-btn {
+  background-color: #2196F3;
+  color: white;
+}
+
+.admin-btn:hover {
+  background-color: #1976D2;
+  transform: translateY(-2px);
+}
+
+.login-footer {
+  margin-top: 2rem;
+}
+
+.login-footer p {
+  margin-bottom: 0.5rem;
+}
+
+.login-footer a {
+  color: #6ff0f2;
+  text-decoration: none;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Student/Admin Login Pages */
+.student-login-container, .admin-login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 2.5rem;
+  border-radius: 12px;
+  background-color: rgba(17, 17, 17, 0.9);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.login-header {
+  margin-bottom: 2rem;
+}
+
+.login-header .login-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.login-header h2 {
+  color: #6ff0f2;
+  margin-bottom: 0.5rem;
+}
+
+.login-header p {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.login-form {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #6ff0f2;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgba(34, 34, 34, 0.8);
+  color: #fff;
+  font-size: 16px;
+}
+
+.form-group input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(111, 240, 242, 0.3);
+}
+
+.error-message {
+  color: #ff4d4d;
+  margin-top: 1rem;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Student Dashboard Specific */
+.page-subtitle {
+  text-align: center;
+  color: #ccc;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Events Grid for Students */
+.events-section {
+  margin-bottom: 3rem;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.event-card {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.event-header h3 {
+  color: #6ff0f2;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.event-sport {
+  background-color: rgba(111, 240, 242, 0.2);
+  color: #6ff0f2;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.event-details {
+  margin-bottom: 1.5rem;
+}
+
+.event-details p {
+  margin-bottom: 0.5rem;
+  color: #ccc;
+}
+
+.register-btn {
+  background-color: #6ff0f2;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.register-btn:hover {
+  background-color: #48d1d6;
+  transform: scale(1.02);
+}
+
+.no-events {
+  text-align: center;
+  color: #ccc;
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background-color: rgba(17, 17, 17, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  backdrop-filter: blur(10px);
+  color: #f1f1f1;
+}
+
+.close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #ff4d4d;
+}
+
+.modal-content h2 {
+  color: #6ff0f2;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.modal-content .form-group {
+  margin-bottom: 1rem;
+}
+
+.modal-content .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgba(34, 34, 34, 0.8);
+  color: #fff;
+  font-size: 14px;
+}
+
+.modal-content input[readonly] {
+  background-color: rgba(34, 34, 34, 0.5);
+  color: #aaa;
+}
+
+.primary-btn {
+  background-color: #6ff0f2;
+  color: #333;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.primary-btn:hover {
+  background-color: #48d1d6;
+}
+
+#registration-msg {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+#registration-msg.success {
+  background-color: rgba(77, 255, 136, 0.1);
+  border: 1px solid #4dff88;
+}
+
+#registration-msg.error {
+  background-color: rgba(255, 77, 77, 0.1);
+  border: 1px solid #ff4d4d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .event-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .modal-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+}
+
+.content-section {
+  padding: 2rem 0;
+  background-color: rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+#sports-list {
+  list-style: none;
+  padding: 0;
+  color: #fff;
+}
+
+#sports-list li {
+  background-color: rgba(255,255,255,0.1);
+  margin: 0.5rem auto;
+  padding: 0.75rem;
+  border-radius: 5px;
+  max-width: 500px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Fix for dropdown option visibility in dark mode */
+#add-event-form select option,
+#add-result-form select option {
+  background-color: #fff;
+  color: #000;
+}
+
+/* About Page Styles */
+.about-page-container {
+  padding: 2rem 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-section {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.about-section h2 {
+  color: #6ff0f2;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #6ff0f2;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.about-section p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+  color: #ccc;
+}
+
+.about-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.about-section ul li {
+  background-color: rgba(111, 240, 242, 0.1);
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  border-left: 4px solid #6ff0f2;
+  color: #f0f6fc;
+}

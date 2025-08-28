@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Sports Activity Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">🏅 Sports Dashboard</div>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="#">Events</a>
+          <a href="#">Participants</a>
+          <a href="#" id="logout-link">Logout</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="hero-text">
+          <h1>Welcome, <span id="user-name">User</span>!</h1>
+          <p id="role-message">Manage your sports activities with the tools below.</p>
+        </div>
+        <div class="dashboard-cards" id="dashboard-cards">
+          <!-- Cards will be dynamically loaded based on user role -->
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    // Check if user is logged in
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!isLoggedIn || !user.id) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Display user name
+      document.getElementById('user-name').textContent = user.username;
+      
+      // Set role-specific message
+      const roleMessage = document.getElementById('role-message');
+      if (user.role === 'admin') {
+        roleMessage.textContent = 'Manage all sports activities with the tools below.';
+      } else {
+        roleMessage.textContent = 'View your sports activities and register for events.';
+      }
+
+      // Load dashboard cards based on role
+      const dashboardCards = document.getElementById('dashboard-cards');
+      
+      if (user.role === 'admin') {
+        // Admin sees all cards
+        dashboardCards.innerHTML = `
+          <a href="event-management.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">📅</div>
+              <h2>Event Management</h2>
+              <p>Create, update, and schedule sports events with ease.</p>
+            </div>
+          </a>
+          <a href="results.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">🏆</div>
+              <h2>Result Tracking</h2>
+              <p>Record and view results for all sports events.</p>
+            </div>
+          </a>
+          <a href="analytics.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">📊</div>
+              <h2>Analytics Dashboard</h2>
+              <p>Analyze participation, performance, and trends.</p>
+            </div>
+          </a>
+          <a href="achievements.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">🎖️</div>
+              <h2>Achievement System</h2>
+              <p>Track and celebrate achievements and milestones.</p>
+            </div>
+          </a>
+        `;
+      } else {
+        // Students see limited cards
+        dashboardCards.innerHTML = `
+          <a href="results.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">🏆</div>
+              <h2>View Results</h2>
+              <p>View results for all sports events.</p>
+            </div>
+          </a>
+          <a href="analytics.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">📊</div>
+              <h2>Analytics Dashboard</h2>
+              <p>Analyze participation, performance, and trends.</p>
+            </div>
+          </a>
+          <a href="achievements.html" class="dashboard-card-link">
+            <div class="dashboard-card">
+              <div class="dashboard-icon">🎖️</div>
+              <h2>Achievement System</h2>
+              <p>Track and celebrate achievements and milestones.</p>
+            </div>
+          </a>
+        `;
+      }
+    });
+
+    document.getElementById('logout-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>

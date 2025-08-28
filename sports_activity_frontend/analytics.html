@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analytics Dashboard - Sports Activity Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">📊 Analytics Dashboard</div>
+        <nav>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="index.html">Home</a>
+          <a href="login.html">Logout</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1 class="page-title">Analytics Dashboard</h1>
+      <section class="analytics-section">
+        <h2>Yearly Matches Won</h2>
+        <table class="analytics-table">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Number of Matches Won</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>2020</td><td>12</td></tr>
+            <tr><td>2021</td><td>18</td></tr>
+            <tr><td>2022</td><td>15</td></tr>
+            <tr><td>2023</td><td>21</td></tr>
+            <tr><td>2024</td><td>17</td></tr>
+          </tbody>
+        </table>
+        <div style="max-width: 600px; margin: 2.5rem auto 0 auto;">
+          <canvas id="matchesChart"></canvas>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    // Role-based access control
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!isLoggedIn || !user.id) {
+        window.location.href = 'login.html';
+        return;
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('matchesChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+          label: 'Matches Won',
+          data: [12, 18, 15, 21, 17],
+          backgroundColor: '#6ff0f2',
+          borderRadius: 8,
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Matches Won Per Year',
+            color: '#6ff0f2',
+            font: { size: 18 }
+          }
+        },
+        scales: {
+          x: {
+            ticks: { color: '#e0e0e0', font: { size: 14 } },
+            grid: { color: 'rgba(111,240,242,0.08)' }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#e0e0e0', font: { size: 14 } },
+            grid: { color: 'rgba(111,240,242,0.08)' }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html> 

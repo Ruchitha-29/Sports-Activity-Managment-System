@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Results - Student Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">🏆 View Results</div>
+        <nav>
+          <a href="student-dashboard.html">Dashboard</a>
+          <a href="index.html">Home</a>
+          <a href="#" id="logout-link">Logout</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1 class="page-title">Results</h1>
+      <p class="page-subtitle">View your performance and all event results</p>
+      
+      <section class="results-section">
+        <h2>My Results</h2>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>🏅 Event Name</th>
+              <th>🏆 Position</th>
+              <th>🏈 Sport Name</th>
+              <th>📅 Date</th>
+            </tr>
+          </thead>
+          <tbody id="my-results-list">
+            <!-- My results will be loaded here -->
+          </tbody>
+        </table>
+      </section>
+      
+      <section class="results-section">
+        <h2>All Results</h2>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>🏅 Event Name</th>
+              <th>🏃‍♂️ Participant Name</th>
+              <th>🏆 Position</th>
+              <th>🏈 Sport Name</th>
+              <th>📅 Date</th>
+            </tr>
+          </thead>
+          <tbody id="all-results-list">
+            <!-- All results will be loaded here -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+  
+  <script>
+    // Check authentication
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userRole = localStorage.getItem('userRole');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!isLoggedIn || userRole !== 'student' || !user.id) {
+        window.location.href = 'student-login.html';
+        return;
+      }
+
+      loadResults();
+    });
+
+    // Load results
+    async function loadResults() {
+      try {
+        const response = await fetch('http://localhost:5000/api/results');
+        const results = await response.json();
+        
+        const user = JSON.parse(localStorage.getItem('user'));
+        
+        // Filter my results
+        const myResults = results.filter(result => result.user_id == user.id);
+        const allResults = results;
+        
+        // Display my results
+        const myResultsList = document.getElementById('my-results-list');
+        if (myResults.length === 0) {
+          myResultsList.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #ccc;">No results found for you yet.</td></tr>';
+        } else {
+          myResultsList.innerHTML = myResults.map(result => `
+            <tr>
+              <td>${result.event_title || 'Unknown Event'}</td>
+              <td><span class="position-badge ${result.position.toLowerCase()}">${result.position}</span></td>
+              <td>${result.sport_name || 'General'}</td>
+              <td>${new Date(result.event_date).toLocaleDateString()}</td>
+            </tr>
+          `).join('');
+        }
+        
+        // Display all results
+        const allResultsList = document.getElementById('all-results-list');
+        if (allResults.length === 0) {
+          allResultsList.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #ccc;">No results available.</td></tr>';
+        } else {
+          allResultsList.innerHTML = allResults.map(result => `
+            <tr>
+              <td>${result.event_title || 'Unknown Event'}</td>
+              <td>${result.username || 'Unknown User'}</td>
+              <td><span class="position-badge ${result.position.toLowerCase()}">${result.position}</span></td>
+              <td>${result.sport_name || 'General'}</td>
+              <td>${new Date(result.event_date).toLocaleDateString()}</td>
+            </tr>
+          `).join('');
+        }
+        
+      } catch (error) {
+        console.error('Error loading results:', error);
+        document.getElementById('my-results-list').innerHTML = '<tr><td colspan="4" style="text-align: center; color: #ff4d4d;">Error loading results.</td></tr>';
+        document.getElementById('all-results-list').innerHTML = '<tr><td colspan="5" style="text-align: center; color: #ff4d4d;">Error loading results.</td></tr>';
+      }
+    }
+
+    // Logout
+    document.getElementById('logout-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = 'login-selection.html';
+    });
+  </script>
+  
+  <style>
+    .position-badge {
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    
+    .position-badge.1st {
+      background-color: #FFD700;
+      color: #333;
+    }
+    
+    .position-badge.2nd {
+      background-color: #C0C0C0;
+      color: #333;
+    }
+    
+    .position-badge.3rd {
+      background-color: #CD7F32;
+      color: #333;
+    }
+    
+    .position-badge.participant {
+      background-color: #6ff0f2;
+      color: #333;
+    }
+  </style>
+</body>
+</html> 

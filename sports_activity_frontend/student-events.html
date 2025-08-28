@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Available Events - Student Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">📅 Available Events</div>
+        <nav>
+          <a href="student-dashboard.html">Dashboard</a>
+          <a href="index.html">Home</a>
+          <a href="#" id="logout-link">Logout</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h1 class="page-title">Available Events</h1>
+      <p class="page-subtitle">Browse and register for upcoming sports events</p>
+      
+      <section class="events-section">
+        <div class="events-grid" id="events-grid">
+          <!-- Events will be loaded here -->
+        </div>
+      </section>
+      
+      <div id="registration-modal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close" id="close-modal">&times;</span>
+          <h2>Register for Event</h2>
+          <form id="registration-form">
+            <div class="form-group">
+              <label for="event-title">Event:</label>
+              <input type="text" id="event-title" readonly />
+            </div>
+            <div class="form-group">
+              <label for="event-sport">Sport:</label>
+              <input type="text" id="event-sport" readonly />
+            </div>
+            <div class="form-group">
+              <label for="event-date">Date:</label>
+              <input type="text" id="event-date" readonly />
+            </div>
+            <div class="form-group">
+              <label for="event-location">Location:</label>
+              <input type="text" id="event-location" readonly />
+            </div>
+            <p style="color: #6ff0f2; margin: 1rem 0; text-align: center;">
+              You will be registered as: <strong id="student-info"></strong>
+            </p>
+            <button type="submit" class="btn primary-btn">Confirm Registration</button>
+          </form>
+          <p id="registration-msg"></p>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    // Check authentication
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userRole = localStorage.getItem('userRole');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!isLoggedIn || userRole !== 'student' || !user.id) {
+        window.location.href = 'student-login.html';
+        return;
+      }
+
+      loadEvents();
+    });
+
+    // Load available events
+    async function loadEvents() {
+      try {
+        const response = await fetch('http://localhost:5000/api/events');
+        const events = await response.json();
+        
+        const eventsGrid = document.getElementById('events-grid');
+        
+        if (events.length === 0) {
+          eventsGrid.innerHTML = '<p class="no-events">No events available at the moment.</p>';
+          return;
+        }
+        
+        eventsGrid.innerHTML = events.map(event => `
+          <div class="event-card">
+            <div class="event-header">
+              <h3>${event.title}</h3>
+              <span class="event-sport">${event.sport_name || 'General'}</span>
+            </div>
+            <div class="event-details">
+              <p><strong>📅 Date:</strong> ${new Date(event.date).toLocaleDateString()}</p>
+              <p><strong>📍 Location:</strong> ${event.location}</p>
+            </div>
+            <button class="btn register-btn" onclick="registerForEvent(${event.id}, '${event.title}', '${event.sport_name || 'General'}', '${event.date}', '${event.location}')">
+              Register for Event
+            </button>
+          </div>
+        `).join('');
+        
+      } catch (error) {
+        console.error('Error loading events:', error);
+        document.getElementById('events-grid').innerHTML = '<p class="error">Error loading events. Please try again.</p>';
+      }
+    }
+
+    // Register for event
+    function registerForEvent(eventId, title, sport, date, location) {
+      const modal = document.getElementById('registration-modal');
+      const form = document.getElementById('registration-form');
+      
+      // Populate modal with event details
+      document.getElementById('event-title').value = title;
+      document.getElementById('event-sport').value = sport;
+      document.getElementById('event-date').value = new Date(date).toLocaleDateString();
+      document.getElementById('event-location').value = location;
+      
+      // Pre-fill student details if available
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user.username) {
+        document.getElementById('student-info').textContent = user.username;
+      }
+      
+      modal.classList.remove('hidden');
+      
+      // Handle form submission
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        
+        if (!user.id) {
+          const msgElement = document.getElementById('registration-msg');
+          msgElement.style.color = '#ff4d4d';
+          msgElement.textContent = 'User information not found. Please log in again.';
+          msgElement.className = 'error';
+          return;
+        }
+        
+        const registrationData = {
+          user_id: user.id,
+          event_id: eventId
+        };
+        
+        try {
+          const response = await fetch('http://localhost:5000/api/registrations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(registrationData)
+          });
+          
+          const result = await response.json();
+          const msgElement = document.getElementById('registration-msg');
+          
+          if (result.success || result.id) {
+            msgElement.style.color = '#4dff88';
+            msgElement.textContent = '✅ Successfully registered for the event!';
+            msgElement.className = 'success';
+            
+            // Clear form
+            form.reset();
+            
+            setTimeout(() => {
+              modal.classList.add('hidden');
+              loadEvents(); // Refresh events
+            }, 2000);
+          } else {
+            msgElement.style.color = '#ff4d4d';
+            msgElement.textContent = result.message || 'Registration failed. Please try again.';
+            msgElement.className = 'error';
+          }
+        } catch (error) {
+          console.error('Registration error:', error);
+          const msgElement = document.getElementById('registration-msg');
+          msgElement.style.color = '#ff4d4d';
+          msgElement.textContent = 'Server error. Please try again.';
+          msgElement.className = 'error';
+        }
+      };
+    }
+
+    // Modal controls
+    document.getElementById('close-modal').addEventListener('click', function() {
+      document.getElementById('registration-modal').classList.add('hidden');
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+      const modal = document.getElementById('registration-modal');
+      if (event.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+
+    // Logout
+    document.getElementById('logout-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = 'login-selection.html';
+    });
+  </script>
+</body>
+</html> 

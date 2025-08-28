@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Login - Sports Activity Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <div class="container nav-container">
+        <div class="logo">🏅 Sports</div>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="login-selection.html">Back to Login</a>
+          <a href="register.html">Sign Up</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="login-container student-login-container">
+          <div class="login-header">
+            <div class="login-icon">👨‍🎓</div>
+            <h2>Student Login</h2>
+            <p>Access your sports activities and register for events</p>
+          </div>
+          
+          <form id="student-login-form" class="login-form">
+            <div class="form-group">
+              <input type="text" id="username" placeholder="Username" required />
+            </div>
+            <div class="form-group">
+              <input type="password" id="password" placeholder="Password" required />
+            </div>
+            <button type="submit" class="login-btn student-btn">Login as Student</button>
+            <p id="login-error" class="error-message"></p>
+          </form>
+          
+          <div class="login-footer">
+            <p>Don't have an account? <a href="register.html">Sign up here</a></p>
+            <p><a href="login-selection.html">← Back to login options</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <script>
+    document.getElementById("student-login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const errorElement = document.getElementById("login-error");
+
+      try {
+        const res = await fetch("http://localhost:5000/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          
+          // Check if user is a student
+          if (data.user.role !== 'student') {
+            errorElement.textContent = "This login is for students only. Please use admin login.";
+            return;
+          }
+          
+          // Store user information
+          localStorage.setItem('user', JSON.stringify(data.user));
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('userRole', 'student');
+          
+          // Redirect to student dashboard
+          window.location.href = "student-dashboard.html";
+        } else {
+          const errorData = await res.json();
+          errorElement.textContent = errorData.message || "Invalid credentials";
+        }
+      } catch (err) {
+        errorElement.textContent = "Login failed. Please try again.";
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html> 
