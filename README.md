@@ -75,6 +75,59 @@ sports
 
 events
 
+🚀 How to Run the Project
+1️⃣ Database Setup (MySQL)
+
+Open MySQL Workbench or MySQL CLI
+
+Create a new database:
+
+CREATE DATABASE sports_activity_db;
+
+
+Import the provided SQL schema file:
+
+USE sports_activity_db;
+
+SOURCE schema.sql;
+
+
+Update your database credentials in:
+
+sports_activity_backend/config/db.js
+
+2️⃣ Backend Setup (Node.js + Express)
+
+Navigate to the backend directory:
+
+cd sports_activity_backend
+
+
+Install required dependencies:
+
+npm install
+
+
+Start the backend server:
+
+node server.js
+
+
+The server will run on the configured port
+(commonly http://localhost:5000).
+
+The backend handles authentication, role-based access (Admin / Student), and all database operations.
+
+3️⃣ Frontend Setup (HTML, CSS, JavaScript)
+
+Open the sports_activity_frontend folder
+
+Open index.html in any modern web browser
+
+Log in as Admin or Student
+
+Users are redirected to their respective dashboards based on role
+
 registrations
 
 results
