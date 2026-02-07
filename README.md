@@ -75,6 +75,12 @@ sports
 
 events
 
+registrations
+
+results
+
+coaches
+
 🚀 How to Run the Project
 1️⃣ Database Setup (MySQL)
 
@@ -128,8 +134,4 @@ Log in as Admin or Student
 
 Users are redirected to their respective dashboards based on role
 
-registrations
 
-results
-
-coaches
